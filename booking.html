@@ -5,23 +5,58 @@
   <meta charset="UTF-8">
   <title>New Booking</title>
   <link rel="stylesheet" href="style.css">
+  <script>
+    function autofillTrainDetails() {
+      const trainNo = document.getElementById('trainNo').value;
+      const fromField = document.getElementById('from');
+      const toField = document.getElementById('to');
+      const classSelect = document.getElementById('class');
+      if (trainNo === "12345") {
+        fromField.value = "Siliguri";
+        toField.value = "Cooch Behar";
+        classSelect.value = "3A";
+      } else if (trainNo === "23456") {
+        fromField.value = "New Jalpaiguri";
+        toField.value = "Sealdah";
+        classSelect.value = "SL";
+      } else {
+        fromField.value = "";
+        toField.value = "";
+        classSelect.value = "SL";
+      }
+    }
+
+    function bookNowMock() {
+      alert("Booking started. IRCTC login will be required. (Mock only)");
+    }
+  </script>
 </head>
 <body>
   <header><h1>New Booking Form</h1></header>
   <main>
-    <form>
-      <label>IRCTC User ID: <input type="text" name="userid" value="ridu123" /></label><br />
-      <label>Password: <input type="password" name="password" value="********" /></label><br />
-      <label>From Station: <input type="text" name="from" value="Siliguri" /></label><br />
-      <label>To Station: <input type="text" name="to" value="Cooch Behar" /></label><br />
-      <label>Journey Date: <input type="date" name="date" /></label><br />
-      <label>Class: <select><option>SL</option><option>3A</option></select></label><br />
-      <label>Quota: <select><option>Tatkal</option></select></label><br />
-      <label>Passenger 1 Name: <input type="text" value="Ali" /></label><br />
+    <form onsubmit="event.preventDefault(); bookNowMock();">
+      <label>Train Number: <input type="text" id="trainNo" onchange="autofillTrainDetails()" /></label><br />
+      <label>From Station: <input type="text" id="from" /></label><br />
+      <label>To Station: <input type="text" id="to" /></label><br />
+      <label>Journey Date: <input type="date" /></label><br />
+      <label>Class: 
+        <select id="class">
+          <option value="SL">Sleeper (SL)</option>
+          <option value="3A">AC 3 Tier (3A)</option>
+        </select>
+      </label><br />
+      <label>Quota: 
+        <select>
+          <option value="Tatkal">Tatkal</option>
+        </select>
+      </label><br />
+      <label>Passenger Name: <input type="text" value="Ali" /></label><br />
       <label>Age: <input type="number" value="27" /></label><br />
-      <label>Gender: <select><option>Male</option><option>Female</option></select></label><br />
+      <label>Gender: 
+        <select><option>Male</option><option>Female</option></select>
+      </label><br />
       <label>UPI ID: <input type="text" value="ridu@upi" /></label><br />
-      <button type="submit">Submit</button>
+      <button type="submit">Book Ticket</button>
     </form>
   </main>
 </body>
